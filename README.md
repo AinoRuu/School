@@ -1,0 +1,2 @@
+# koulu
+Savonian tietotekniikkainsinööriopinoissa suoritettuja tehtäviä
