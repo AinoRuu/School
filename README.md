@@ -1,5 +1,5 @@
 # koulu
-Savonian tietotekniikkainsinööriopinoissa suoritettuja tehtäviä
+Savonian tietotekniikkainsinööriopinoissa suoritettuja tehtäviä. Tästä löytyy suoina linkkeinä suurimmat omissa repoissaan tai suoraan julkaistulle sivulle vietynä. Tiedostoista löytyy erinäisiä tehtäviä, joita on eri kursseilla tullut tehtyä.
 
 [HRapp Repository](https://github.com/AinoRuu/HRapp)
 
@@ -9,4 +9,4 @@ Savonian tietotekniikkainsinööriopinoissa suoritettuja tehtäviä
 
 [Ohjelmistotuotanto 1 ryhmätyö](https://github.com/AinoRuu/projekti-c-ja-sql)
 
-[Ohjlemistotuotanto 2 ryhmätyö]()
+[Ohjlemistotuotanto 2 ryhmätyö](https://github.com/AinoRuu/Projekti-2)
