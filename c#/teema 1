@@ -1,0 +1,242 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+/*
+Tehtävä 1
+Esittele ja anna alkuarvot muuttujille, joihin pitäisi tallentaa seuraavat tiedot:
+
+piin likiarvo
+lähiosoite
+henkilötunnus
+nimesi ensimmäinen kirjain
+lämpötila yhden desimaalin tarkkuudella
+
+Tulosta arvot muuttujista allekkain käyttäen sekä Console.WriteLine(), että Console.Write()-komentoja.
+Ohjelman pitää tulostaa seuraavat tiedot:
+
+3.14159
+Munkkikuja 3
+121299A1234
+S
+-12.4
+*/
+
+namespace Projekti
+{
+    class Program
+    {
+        static void Main()
+        {
+            //Your code here
+            //assigning variables
+            float fPii = 3.14159f;
+            string sOsoite = "Munkkikuja 3";
+            string sHlo = "121299A1234";
+            char cKirjain = 'S';
+            float fLampo = -12.4f;
+
+            //printing commands
+            Console.WriteLine(fPii);
+            Console.WriteLine(sOsoite);
+            Console.WriteLine(sHlo);
+            Console.WriteLine(cKirjain);
+            Console.Write(fLampo);
+
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+/*
+Tehtävä 2
+Esittele muuttujat sEtunimi, sSukunimi ja sKokonimi.
+Lue käyttäjältä etunimi ja sukunimi ja yhdistä nämä sKokonimi-muuttujaan.
+Tulosta nimi näytölle sKokonimi-muuttujasta. Alla esimerkki ohjelmasta:
+
+Anna etunimi : Sami
+Anna sukunimi : Lahti
+
+Nimesi on Sami Lahti
+*/
+
+namespace Projekti
+{
+    class Program
+    {
+        static void Main()
+        {
+            //Your code here
+            //assigning the variables
+            string sEtunimi = "";
+            string sSukunimi = "";
+
+            //asking the name of the user
+            Console.Write("Anna etunimi : ");
+            sEtunimi = Console.ReadLine();
+            Console.Write("Anna sukunimi : ");
+            sSukunimi = Console.ReadLine();
+
+            //assigning variable sKokonimi
+            string sKokonimi = sEtunimi + " " + sSukunimi;
+
+            //priting out a newline and info about th fullname
+            Console.Write("\n");
+            Console.WriteLine("Nimesi on {0}", sKokonimi);
+
+
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+/*
+
+tehtävä 3
+Esittele kaksi kokonaislukumuuttujaa ja lue niihin käyttäjältä arvot.
+Tulosta näiden muuttujien summa, erotus ja tulo alla olevalla tavalla
+(HUOM! Laskutoimituksen tulostus alkaa kaikissa samasta kohdasta!)
+
+Summa :  10 + 5 = 15
+Erotus : 10 - 5 = 5
+Tulo :   10 * 5 = 50
+*/
+
+namespace Projekti
+{
+    class Program
+    {
+        static void Main()
+        {
+            // Your code here
+            //assigning the variables iFirst and iSecond
+            int iFirst = 0;
+            int iSecond = 0;
+
+            //Asking the user to give numbers to be used
+            Console.WriteLine("Anna ensimmäinen kokonaisluku:");
+            iFirst = int.Parse(Console.ReadLine());
+            Console.WriteLine("Anna toinen kokonaisluku:");
+            iSecond = int.Parse(Console.ReadLine());
+
+            //lets print out the laskutoimitukset
+            int iSumma = iFirst + iSecond;
+            int iErotus = iFirst - iSecond;
+            int iTulo = iFirst * iSecond;
+
+            Console.WriteLine("Summa :  {0} + {1} = {2}",iFirst, iSecond, iSumma);
+            Console.WriteLine("Erotus : {0} - {1} = {2}", iFirst, iSecond, iErotus);
+            Console.WriteLine("Tulo :   {0} * {1} = {2}", iFirst, iSecond, iTulo);
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+/*
+Tehtävä 4
+Esittele nimi, pituus ja paino muuttujat. Esittele lisäksi bmi muuttuja.
+Kysy käyttäjältä nimi, pituus metreinä ja paino kilon tarkkuudella.
+Laske painoindeksi bmi muuttujaan seuraavasti:
+
+bmi = paino / pituus ^ 2
+
+Tulosta lopuksi:
+
+Olli Opiskelija, pituutesi on 1,81 m ja painosi 104 kg
+Painoindeksisi on siten 31,75
+*/
+
+namespace Projekti
+{
+    class Program
+    {
+        static void Main()
+        {
+            //Your code here
+            //assigning the variables
+            string sNimi = "";
+            float fPituus = 0;
+            int iPaino = 0;
+            float fBmi = 0;
+
+            //Asking the user
+            Console.WriteLine("Anna koko nimesi ");
+            sNimi = Console.ReadLine();
+            Console.WriteLine("Anna pituutesi metreinä (ilman yksikköä)");
+            fPituus = float.Parse(Console.ReadLine());
+            Console.WriteLine("Anna painosi kilon tarkkuudella (ilman yksikköä)");
+            iPaino = int.Parse(Console.ReadLine());
+            fBmi = iPaino / (fPituus*fPituus);
+
+            //final print
+            Console.WriteLine("{0}, pituutesi on {1} m ja painosi {2} kg\nPainoindeksisi on siten {3:F2}",sNimi, fPituus, iPaino, fBmi);
+
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+/*
+tehtävä 5
+Esittele muuttuja pii, jolle annat alkuarvoksi piin likiarvon 6 desimaalin tarkkuudella.
+Lue käyttäjältä ympyrän halkaisija ja tulosta ympyrän piiri ja pinta-ala kolmen desimaalin
+tarkkuudella seuraavasti (halkaisijaksi annettu 2,5) :
+
+PIIRI     : 7,854
+PINTA-ALA : 4,909 
+*/
+
+namespace Projekti
+{
+    class Program
+    {
+        static void Main()
+        {
+            //Your code here
+            //assigning the variables
+            float pii = 3.141592f;
+
+            //ask for the divider
+            Console.WriteLine("Anna ympyrän hakaisija");
+            float fHalkaisija = float.Parse(Console.ReadLine());
+
+            //lets make sade, piiri and pinta-ala variabes
+            float fSade = fHalkaisija / 2;
+            float fPiiri = fHalkaisija * pii;
+            float fAla = (fSade * fSade)*pii;
+
+            //print out the assignment
+            Console.WriteLine("PIIRI     : {0:F3}", fPiiri);
+            Console.WriteLine("PINTA-ALA : {0:F3}", fAla);
+
+        }
+    }
+}
+
