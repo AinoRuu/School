@@ -1,5 +1,5 @@
 # Opintoja varten koodatut
-Savonian tietotekniikkainsinööriopinoissa suoritettuja tehtäviä. Tästä löytyy suoina linkkeinä suurimmat omissa repoissaan tai suoraan julkaistulle sivulle vietynä. Tiedostoista löytyy erinäisiä tehtäviä, joita on eri kursseilla tullut tehtyä.
+Savonian tietotekniikkainsinööriopinoissa suoritettuja tehtäviä. Tästä löytyy suorina linkkeinä suurimmat omissa repoissaan tai suoraan julkaistulle sivulle vietynä. Tiedostoista löytyy erinäisiä tehtäviä, joita on eri kursseilla tullut tehtyä.
 
 [HRapp Repository](https://github.com/AinoRuu/HRapp)
 
