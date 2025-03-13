@@ -1,0 +1,1260 @@
+//TEHTÄVÄ 1
+import java.util.Scanner;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+
+        String osake;
+
+        double osinkopros = 0;
+
+        int sijoitus = 0;
+
+        double osinko = 0;
+
+        Scanner input = new Scanner(System.in);
+        System.out.print("Anna osake:");
+        osake = input.nextLine();
+
+        try {
+            System.out.print("Anna osinkopros:");
+            osinkopros = input.nextDouble();
+
+            System.out.print("Anna sijoitus:");
+            sijoitus = input.nextInt();
+
+        }
+        catch (Exception ex){
+            System.out.println("Syötetty ei ollut luku");
+        }
+
+        osinko = (double)Math.round(sijoitus * (osinkopros / 100));
+
+        System.out.printf("Osakkeen " + osake + " tuotto pääomalle " + sijoitus + " on " + "%5.2f\n", osinko);
+    }
+}
+
+//TEHTÄVÄ 2
+import java.util.Scanner;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+        // to see how IntelliJ IDEA suggests fixing it.
+        Scanner input = new Scanner(System.in);
+
+        String korkeusstrng;
+
+        int korkeus;
+
+        String leveysstrng;
+
+        int leveys;
+
+        char merkki;
+
+        boolean vastaus;
+
+
+        System.out.print("Anna korkeus:");
+        korkeusstrng = input.nextLine();
+        korkeus = Integer.parseInt(korkeusstrng);
+
+        System.out.print("Anna leveys:");
+        leveysstrng = input.nextLine();
+        leveys = Integer.parseInt(leveysstrng);
+
+        System.out.print("Anna piirtomerkki:");
+        merkki = input.next().charAt(0);
+
+        System.out.print("Täytetty vai ei (k=kyllä, e=ei):");
+        vastaus = input.next().equalsIgnoreCase("k");
+
+        for (int i = 0; i < korkeus; i++) {
+            if (vastaus) {
+                for (int h = 0; h < leveys; h++) {
+                    System.out.print(merkki);
+                }
+
+            } else {
+                for (int h = 0; h < leveys; h++) {
+                    if (i == 0 || i == korkeus - 1 || h == 0 || h == leveys - 1){
+                        System.out.print(merkki);
+                    } else {
+                        System.out.print(" ");
+                    }
+
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+//TEHTÄVÄ 3
+import java.util.Scanner;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+
+        double kuukausitulo = 0;
+
+        double kokonaistulo = 0;
+
+        double suurintulo = 0;
+
+        final int negatiivinen = -1;
+
+        int i = 0;
+
+        System.out.println("Ohjelma laskee kuukausien kokonaistulon, keskimääräisen kuukausikohtaisen tulon\n" +
+                "ja suurimman kuukausikohtaisen tulon antamiesi tietojen perusteella.");
+
+        System.out.println();
+
+        System.out.println("Syötä kuukausikohtaiset tulot. ");
+
+
+        for (i = 1; kuukausitulo > negatiivinen; i++) {
+            try {
+                System.out.print("Anna " + i + ". kuukauden tulo: ");
+                kuukausitulo = input.nextDouble();
+
+                kokonaistulo += kuukausitulo;
+
+                if (kuukausitulo > suurintulo)
+                    suurintulo = kuukausitulo;
+
+            } catch (Exception e) {
+                System.out.println("Syötetty ei ollut luku");
+                continue;
+            }
+            if (i % 12 == 0 )
+                System.out.println();
+        }
+
+
+        System.out.println();
+
+        System.out.printf("Kokonaistulot ovat " + "%.1f" + "\n", kokonaistulo);
+
+        System.out.printf("Keskiarvoinen kuukausikohtainen tulo on " + "%.1f" + "\n", kokonaistulo / i);
+
+        System.out.printf("Suurin kuukausikohtainen tulo on " + "%.1f" + "\n", suurintulo);
+    }
+}
+
+//TEHTÄVÄ 4
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Random;
+import java.util.Collections;
+
+public class Main {
+
+    //arvonta
+    public static ArrayList<Integer> ArvoLotto() {
+
+        Random rand = new Random();
+
+        ArrayList<Integer> lottorivi = new ArrayList<>();
+
+        while (lottorivi.size() < 7) {
+            int randNum = rand.nextInt(1, 41);
+            if (!lottorivi.contains(randNum)) lottorivi.add(randNum);
+        }
+        return lottorivi;
+    }
+
+    private static void tulostaRivi(ArrayList<Integer> rivi) {
+        for (int i = 0; i < rivi.size(); i++) {
+            System.out.print(rivi.get(i));
+            if (i < rivi.size() - 1) {
+                System.out.print(", ");
+            }
+            else{
+                System.out.print(". ");
+            }
+        }
+    }
+
+    public static void VertaaLottoriveja(ArrayList<Integer> rivi1, ArrayList<Integer> rivi2) {
+        int samatNumerot = 0;
+        ArrayList<Integer> yhteiset = new ArrayList<>();
+
+        for (int lottonumero : rivi1) {
+            if (rivi2.contains(lottonumero)) {
+                yhteiset.add(lottonumero);
+                samatNumerot++;
+            }
+        }
+
+        Collections.sort(yhteiset);
+
+        if (samatNumerot > 1){
+            System.out.print("Oikein oli " + samatNumerot + " kpl, jotka olivat ");
+            tulostaRivi(yhteiset);
+        } else if (samatNumerot == 1) {
+            System.out.print("Oikein oli " + samatNumerot + " kpl, joka oli ");
+            tulostaRivi(yhteiset);
+        } else {
+            System.out.printf("Oikein oli " + samatNumerot + " kpl.");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        ArrayList<Integer> lottorivi = ArvoLotto();
+
+        boolean vastaus;
+
+        System.out.print("Lottorivi on: ");
+        tulostaRivi(lottorivi);
+        System.out.println();
+
+        System.out.print("Haluatko arpoa rivin (k= kyllä, e = ei)? ");
+        vastaus = input.next().equalsIgnoreCase("k");
+
+        while (vastaus){
+            ArrayList<Integer> lottorivi2 = ArvoLotto();
+
+            System.out.print("Ohjelma arpoi rivin: ");
+            tulostaRivi(lottorivi2);
+            System.out.println();
+
+            //vertailu
+            VertaaLottoriveja(lottorivi, lottorivi2);
+
+            System.out.println();
+
+            System.out.print("Haluatko arpoa rivin (k= kyllä, e = ei)? ");
+            vastaus = input.next().equalsIgnoreCase("k");
+        }
+
+            System.out.print("Kiitos ja hei hei!");
+    }
+}
+
+//TEHTÄVÄ 5
+public class Main {
+    public static void main(String[] args) {
+        Opiskelija op1 = new Opiskelija("Markku", "Matilainen",
+                "1234567", "Koulukatu 22 70100 KUOPIO");
+        Opiskelija op2 = new Opiskelija("Maiju", "Makkonen",
+                "891011", "Vuorikatu 27 70100 KUOPIO");
+
+
+        System.out.println(op1);
+        System.out.println(op2);
+    }
+}
+public class Opiskelija {
+
+    //muuttujat
+    private String etunimi;
+    private String sukunimi;
+    private String opiskelijanumero;
+    private String osoite;
+
+    //oletusmuodostin
+
+    public Opiskelija() {
+
+    }
+
+    // muodostimet
+    public Opiskelija(String etunimi, String sukunimi, String opiskelijanumero, String osoite) {
+        this.etunimi = etunimi;
+        this.sukunimi = sukunimi;
+        this.opiskelijanumero = opiskelijanumero;
+        this.osoite = osoite;
+    }
+
+    //getterit ja setterit
+    public String getEtunimi() {
+        return etunimi;
+    }
+
+    public void setEtunimi(String etunimi) {
+        this.etunimi = tarkistanimi(etunimi);
+
+    }
+
+    public String getSukunimi() {
+        return sukunimi;
+    }
+
+    public void setSukunimi(String sukunimi) {
+        this.sukunimi = tarkistanimi(sukunimi);
+
+    }
+
+    public String getOpiskelijanumero() {
+        return opiskelijanumero;
+    }
+
+    public void setOpiskelijanumero(String opiskelijanumero) {
+        this.opiskelijanumero = opiskelijanumero;
+    }
+
+    public String getOsoite() {
+        return osoite;
+    }
+
+    public void setOsoite(String osoite) {
+        this.osoite = osoite;
+    }
+
+
+    //jäsenfunktiot
+
+    private String tarkistanimi(String nimi){
+        String n = nimi.trim();
+        n = n.toUpperCase().substring(0, 1) +
+                n.toLowerCase().substring(1,n.length());
+        return n;
+    }
+
+    @Override
+    public String toString() {
+        return "Opiskelija:" +
+                " " + getEtunimi() +
+                " " + getSukunimi() +
+                " " + getOpiskelijanumero() +
+                " " + getOsoite();
+    }
+}
+
+//TEHTÄVÄ 6
+
+public class Main {
+    public static void main(String[] args) {
+
+        Auto a1 = new Auto();
+        Auto a2 = new Auto();
+
+        a1.kysyTiedot(a1);
+        System.out.println(a1);
+
+
+        a2.kysyTiedot(a2);
+        System.out.println(a2);
+    }
+}
+
+import java.time.Year;
+import java.util.Scanner;
+
+public class Auto {
+
+    //
+    private String rekisterinumero;
+    private String merkki;
+    private int vuosimalli;
+    private String malli;
+
+
+    //muodostimet
+    public Auto() {
+    }
+
+    public Auto(int vuosimalli, String malli) {
+        this.vuosimalli = vuosimalli;
+        this.malli = malli;
+    }
+
+    public Auto(String rekisterinumero, String merkki, int vuosimalli, String malli) {
+        this.rekisterinumero = rekisterinumero;
+        this.merkki = merkki;
+        this.vuosimalli = vuosimalli;
+        this.malli = malli;
+    }
+
+    //getteritsetterit
+
+    public String getRekisterinumero() {
+        return rekisterinumero;
+    }
+
+    public void setRekisterinumero(String rekisterinumero) {
+        String rekkari = rekisterinumero;
+        if(rekkari.length() <= 7 && rekkari.contains("-")){
+            this.rekisterinumero = rekkari;
+        }else{
+            this.rekisterinumero = "Rekisterinumeroa ei syötetty oikein";
+        }
+
+
+    }
+
+    public String getMerkki() {
+        return merkki;
+    }
+
+    public void setMerkki(String merkki) {
+        this.merkki = merkki;
+    }
+
+    public int getVuosimalli() {
+        return vuosimalli;
+    }
+
+    public void setVuosimalli(int vuosimalli) {
+        int year = Year.now().getValue();
+        if (vuosimalli >= 1900 && vuosimalli < year){
+            this.vuosimalli = vuosimalli;
+        }else{
+            this.vuosimalli = 1900;
+        }
+
+    }
+
+    public String getMalli() {
+        return malli;
+    }
+
+    public void setMalli(String malli) {
+        this.malli = malli;
+    }
+
+    //metodit
+
+    public void kysyTiedot(Auto auto){
+        Scanner input = new Scanner(System.in);
+        String vmalliStr;
+
+        System.out.println("Syötä auton tiedot:");
+
+        System.out.print("Rekisterinumero: ");
+        auto.rekisterinumero = input.nextLine();
+        setRekisterinumero(rekisterinumero);
+
+
+        System.out.print("Merkki: ");
+        auto.merkki = input.nextLine();
+        setMerkki(merkki);
+
+        System.out.print("Vuosimalli: ");
+         vmalliStr= input.nextLine();
+         try{
+             auto.vuosimalli = Integer.parseInt(vmalliStr);
+             setVuosimalli(vuosimalli);
+         }
+         catch (Exception ex){
+             auto.vuosimalli = 1900;
+             setVuosimalli(vuosimalli);
+         }
+
+
+        System.out.print("Malli:");
+        auto.malli = input.nextLine();
+        setMalli(malli);
+
+    }
+
+    @Override
+    public String toString() {
+        return "Auto:" +
+                " " + getRekisterinumero() +
+                " " + getMerkki() +
+                " " + getVuosimalli() +
+                " " + getMalli();
+    }
+}
+
+//TEHTÄVÄ 7
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ArrayList<Opiskelija> opiskelijat = new ArrayList();
+        Scanner scanner = new Scanner(System.in);
+        boolean  vastaus;
+
+        System.out.print("Haluatko lisätä uuden opintosuoritteen? (k/e) ");
+        vastaus = scanner.next().equalsIgnoreCase("k");
+        while (vastaus) {
+            Opiskelija opisk = new Opiskelija();
+            opisk.kysyTiedot();
+            opiskelijat.add(opisk);
+
+            System.out.print("Haluatko lisätä uuden opintosuoritteen? (k/e) ");
+            vastaus = scanner.next().equalsIgnoreCase("k");
+        }
+
+        for (Opiskelija o : opiskelijat) {
+            o.tulosta();
+        }
+
+
+    }
+}
+import java.util.Scanner;
+public class Opiskelija {
+    private String nimi;
+    int pisteetkokeesta;
+    int pisteetviikkotehtavista;
+
+    final int MAX_VIIKKOTEHTAVAPISTEET = 16;
+    final int MAX_KOEPISTEET = 20;
+
+    public Opiskelija() {
+    }
+
+    public Opiskelija(String nimi) {
+        this.nimi = nimi;
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+
+    public int getPisteetviikkotehtavista() {
+        return pisteetviikkotehtavista;
+    }
+
+    public void setPisteetviikkotehtavista(int pisteetviikkotehtavista) {
+        if(pisteetviikkotehtavista > 16){
+            this.pisteetviikkotehtavista = 16;
+        } else if (pisteetviikkotehtavista < 0) {
+            this.pisteetviikkotehtavista = 0;
+        }
+        else {
+        this.pisteetviikkotehtavista = pisteetviikkotehtavista;
+        }
+    }
+
+    public int getPisteetkokeesta() {
+        return pisteetkokeesta;
+    }
+
+    public void setPisteetkokeesta(int pisteetkokeesta) {
+        if(pisteetkokeesta > 20){
+            this.pisteetkokeesta = 20;
+        } else if (pisteetkokeesta < 0) {
+            this.pisteetkokeesta = 0;
+        }
+        else {
+            this.pisteetkokeesta = pisteetkokeesta;
+        }
+
+    }
+
+
+    public void kysyTiedot() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Anna nimi: ");
+        setNimi(scanner.nextLine());
+        System.out.print("Anna viikkotehtävien tehtäväpisteet (max 16p): ");
+        setPisteetviikkotehtavista(scanner.nextInt());
+        System.out.print("Anna kokeen pisteet (max 20p): ");
+        setPisteetkokeesta(scanner.nextInt());
+        scanner.nextLine();
+    }
+    public int getArvosana() {
+        int arvosana = 0;
+        if (pisteetkokeesta < 10)
+            arvosana = 0;
+        else if (pisteetkokeesta < 12)
+            arvosana = 1;
+        else if (pisteetkokeesta < 14)
+            arvosana = 2;
+        else if (pisteetkokeesta < 16)
+            arvosana = 3;
+        else if (pisteetkokeesta < 18)
+            arvosana = 4;
+        else
+            arvosana = 5;
+        if (arvosana > 0 && ((double) pisteetviikkotehtavista / MAX_VIIKKOTEHTAVAPISTEET) >= 0.75)
+            arvosana++;
+        if (arvosana > 5)
+            arvosana = 5;
+        return arvosana;
+    }
+
+    public void tulosta() {
+        System.out.print("Henkilö: " + nimi);
+        System.out.print(", Viikkotehtävien pisteet: " + pisteetviikkotehtavista);
+        System.out.print(", Kokeen pisteet: " + pisteetkokeesta);
+
+        System.out.println(", Arvosana: " + getArvosana());
+    }
+}
+
+//TEHTÄVÄ 8
+
+public class Main {
+    public static void main(String[] args) {
+        Opiskelijat opiskelijat = new Opiskelijat();
+
+        Osoite os1 = new Osoite("Koulukatu 22", "90100", "Oulu");
+        Osoite os2 = new Osoite("Satamatie 5", "90250", "Oulu");
+
+        Opiskelija op1 = new Opiskelija("Markku", "Matilainen",
+                "1234567", os1);
+        Opiskelija op2 = new Opiskelija("Maiju", "Makkonen",
+                "891011", os2);
+
+
+        opiskelijat.lisaaOpiskelija(op1);
+        opiskelijat.lisaaOpiskelija(op2);
+
+        opiskelijat.tulostaAsukkaat("Oulu");
+
+        opiskelijat.poistaOpiskelija(op1);
+
+        opiskelijat.tulostaAsukkaat("Oulu");
+    }
+}
+
+public class Opiskelija {
+
+    //muuttujat
+    private String etunimi;
+    private String sukunimi;
+    private String opiskelijanumero;
+    private Osoite osoite = new Osoite();
+
+    //oletusmuodostin
+
+    public Opiskelija() {
+
+    }
+
+    // muodostimet
+    public Opiskelija(String etunimi, String sukunimi, String opiskelijanumero, Osoite osoite) {
+        this.etunimi = etunimi;
+        this.sukunimi = sukunimi;
+        this.opiskelijanumero = opiskelijanumero;
+        setOsoite(osoite);
+    }
+
+
+
+    //getterit ja setterit
+    public String getEtunimi() {
+        return etunimi;
+    }
+
+    public void setEtunimi(String etunimi) {
+        this.etunimi = StringHelper.tarkistanimi(etunimi);
+    }
+
+    public String getSukunimi() {
+        return sukunimi;
+    }
+
+    public void setSukunimi(String sukunimi) {
+        this.sukunimi = StringHelper.tarkistanimi(sukunimi);
+
+    }
+
+    public String getOpiskelijanumero() {
+        return opiskelijanumero;
+    }
+
+    public void setOpiskelijanumero(String opiskelijanumero) {
+        this.opiskelijanumero = opiskelijanumero;
+    }
+
+    public Osoite getOsoite() {
+        return osoite;
+    }
+
+    public void setOsoite(Osoite osoite) {
+        this.osoite = osoite;
+    }
+
+
+    //jäsenfunktiot
+
+
+    @Override
+    public String toString() {
+        return "Opiskelija:" +
+                " " + getEtunimi() +
+                " " + getSukunimi() +
+                " " + getOpiskelijanumero() +
+                " " + getOsoite();
+    }
+}
+
+import java.util.ArrayList;
+
+public class Opiskelijat {
+
+    private ArrayList<Opiskelija> Opiskelijat = new ArrayList<>();
+
+    public void lisaaOpiskelija(Opiskelija o){
+        Opiskelijat.add(o);
+
+    }
+    public void poistaOpiskelija(Opiskelija o){
+        Opiskelijat.remove(o);
+
+    }
+    public void tulostaAsukkaat(String kaupunki){
+        for (Opiskelija op : Opiskelijat){
+            if(op.getOsoite().getPostitoimipaikka().contains(kaupunki)) {
+                System.out.println(op.toString());
+            }
+        }
+
+    }
+
+
+}
+
+public class Osoite {
+    private String katuosoite;
+    private String postinumero;
+    private String postitoimipaikka;
+
+    public Osoite() {
+    }
+
+    public Osoite(String katuosoite, String postinumero, String postitoimipaikka) {
+        this.katuosoite = katuosoite;
+        this.postinumero = postinumero;
+        this.postitoimipaikka = postitoimipaikka;
+    }
+
+    public String getKatuosoite() {
+        return katuosoite;
+    }
+
+    public void setKatuosoite(String katuosoite) {
+        this.katuosoite = katuosoite;
+    }
+
+    public String getPostinumero() {
+        return postinumero;
+    }
+
+    public void setPostinumero(String postinumero) {
+        this.postinumero = postinumero;
+    }
+
+    public String getPostitoimipaikka() {
+        return postitoimipaikka;
+    }
+
+    public void setPostitoimipaikka(String postitoimipaikka) {
+        this.postitoimipaikka = StringHelper.tarkistanimi(postitoimipaikka);
+    }
+
+    @Override
+    public String toString() {
+        return "Osoite: " +
+                " " + getKatuosoite() +
+                " " + getPostinumero() +
+                " " + getPostitoimipaikka();
+    }
+}
+
+public class StringHelper {
+    public static String tarkistanimi(String nimi){
+        String n = nimi.trim();
+        n = n.toUpperCase().substring(0, 1) +
+                n.toLowerCase().substring(1,n.length());
+        return n;
+    }
+
+}
+
+
+//TEHTÄVÄ 9
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        double kasvuprosentti;
+        int ajanjakso;
+
+        final ArrayList<Osake> Osakkeet = new ArrayList<>();
+        final Scanner input = new Scanner(System.in);
+        boolean vastaus;
+
+
+        System.out.print("Lisätäänkö uusi osake? (k/e) ");
+        vastaus = input.nextLine().equalsIgnoreCase("k");
+        while (vastaus){
+            Osake osake = new Osake();
+            System.out.print("Anna osakkeen nimi: ");
+            osake.setNimi(input.nextLine());
+
+            System.out.print("Anna ostohinta: ");
+            osake.setOstohinta(Double.parseDouble(input.nextLine()));
+
+
+            Osakkeet.add(osake);
+
+            System.out.print("Lisätäänkö uusi osake (k/e) ");
+            vastaus = input.nextLine().equalsIgnoreCase("k");
+
+        }
+
+        System.out.print("Monelleko vuodelle arvo lasketaan: ");
+        ajanjakso = Integer.parseInt(input.nextLine());
+
+        System.out.print("Tuottoprosentti: ");
+        kasvuprosentti = Double.parseDouble(input.nextLine());
+
+
+        if (ajanjakso > 0) {
+            for (Osake o : Osakkeet) {
+                o.TulostaArvo(kasvuprosentti, ajanjakso);
+            }
+        }
+    }
+}
+
+public class Osake {
+
+    private String nimi;
+    private double ostohinta;
+
+    public Osake() {
+    }
+
+    public Osake(String nimi, double ostohinta) {
+        this.nimi = nimi;
+        this.ostohinta = ostohinta;
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+
+    public double getOstohinta() {
+        return ostohinta;
+    }
+
+    public void setOstohinta(double ostohinta) {
+        this.ostohinta = ostohinta;
+    }
+
+    public void TulostaArvo(final double kasvuprosentti,final int ajanjakso){
+        System.out.println("Nimi: " + getNimi());
+        System.out.println("Ostohinta: " + getOstohinta());
+
+        double arvo = getOstohinta();
+        for (int i=0;i<ajanjakso;i++) {
+            arvo += LaskeTuottoYhdelleVuodelle(ajanjakso, kasvuprosentti, arvo);
+        }
+        System.out.println("Arvo " + ajanjakso + " vuoden päästä: " + String.format("%1.2f", arvo));
+
+    }
+
+    private double LaskeTuottoYhdelleVuodelle(final int ajanjakso, final double kasvuprosentti,
+                                              final double arvo) {
+
+        return arvo * kasvuprosentti/100;
+
+    }
+}
+
+
+//TEHTÄVÄ 10
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Double> desimaalit = Arrays.asList(1.5, 2.5, 10.4, 22.3, 90.3, 0.3);
+        double tulos = MathUtils.LaskeYhteen(desimaalit);;
+        double suurin = MathUtils.SuurinLuku(desimaalit);;
+        double keskiarvo = MathUtils.LaskeKeskiarvo(desimaalit);;
+
+        System.out.println("Desimaalilukujen summa on " + (String.format("%1.2f", tulos)) + ", luvuista suurin on "
+                + (String.format("%1.2f", suurin)) + " ja lukujen keskiarvo on " + (String.format("%1.2f", keskiarvo)) );
+
+    }
+}
+import java.util.ArrayList;
+import java.util.List;
+
+public class MathUtils {
+    public static double LaskeYhteen(List<Double> DesimaaliLuvut){
+        double tulos = 0;
+        for (Double luku : DesimaaliLuvut){
+            tulos = tulos + luku;
+        }
+        return tulos;
+    }
+
+    public static double SuurinLuku(List<Double> DesimaaliLuvut){
+        double suurin = 0;
+        for (double luku : DesimaaliLuvut){
+            if (luku > suurin){
+                suurin = luku;
+            }
+        }
+        return suurin;
+    }
+    public static double LaskeKeskiarvo(List<Double> DesimaaliLuvut){
+        double tulos = 0;
+        double keskiarvo = 0;
+        int maara = 0;
+        for (double luku : DesimaaliLuvut){
+            tulos = tulos + luku;
+            maara++;
+        }
+        keskiarvo = tulos/maara;
+
+        return keskiarvo;
+    }
+}
+
+
+//TEHTÄVÄ 11
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Opiskelija opiskelija = new Opiskelija();
+
+        System.out.print("Anna etunimi: ");
+        opiskelija.setEtunimi(sc.nextLine());
+
+        System.out.print("Anna sukunimi: ");
+        opiskelija.setSukunimi(sc.nextLine());
+
+        System.out.print("Anna opiskelijanumero: ");
+        opiskelija.setOpiskelijanumero(sc.nextLine());
+
+        System.out.print("Anna osoite: ");
+        opiskelija.setOsoite(sc.nextLine());
+
+        if (OpiskelijaUtils.TarkastaTiedot(opiskelija) != null){
+            System.out.println(opiskelija);
+        }
+        else{
+            System.out.println("Tiedot syötettiin väärin.");
+        }
+
+
+
+    }
+}
+
+public class Opiskelija {
+
+    //muuttujat
+    private String etunimi;
+    private String sukunimi;
+    private String opiskelijanumero;
+    private String osoite;
+
+    //oletusmuodostin
+
+    public Opiskelija() {
+
+    }
+
+    // muodostimet
+    public Opiskelija(String etunimi, String sukunimi, String opiskelijanumero, String osoite) {
+        this.etunimi = etunimi;
+        this.sukunimi = sukunimi;
+        this.opiskelijanumero = opiskelijanumero;
+        this.osoite = osoite;
+    }
+
+    //getterit ja setterit
+    public String getEtunimi() {
+        return etunimi;
+    }
+
+    public void setEtunimi(String etunimi) {
+        this.etunimi = etunimi;
+
+    }
+
+    public String getSukunimi() {
+        return sukunimi;
+    }
+
+    public void setSukunimi(String sukunimi) {
+        this.sukunimi = sukunimi;
+
+    }
+
+    public String getOpiskelijanumero() {
+        return opiskelijanumero;
+    }
+
+    public void setOpiskelijanumero(String opiskelijanumero) {
+        this.opiskelijanumero = opiskelijanumero;
+    }
+
+    public String getOsoite() {
+        return osoite;
+    }
+
+    public void setOsoite(String osoite) {
+        this.osoite = osoite;
+    }
+
+
+    //jäsenfunktiot
+
+
+    @Override
+    public String toString() {
+        return "Opiskelija:" +
+                " " + getEtunimi() +
+                " " + getSukunimi() +
+                " " + getOpiskelijanumero() +
+                " " + getOsoite();
+    }
+}
+
+public class OpiskelijaUtils {
+
+    public static Opiskelija TarkastaTiedot(Opiskelija o){
+        if (o.getEtunimi().isBlank()){
+            return null;
+        } else{
+            String n = OpiskelijaUtils.tarkistanimi(o.getEtunimi());
+            o.setEtunimi(n);
+        }
+        if (o.getSukunimi().isBlank()){
+            return null;
+        } else{
+            String m = OpiskelijaUtils.tarkistanimi(o.getSukunimi());
+            o.setSukunimi(m);
+        }
+        try {
+            Integer.parseInt(o.getOpiskelijanumero());
+        }catch (Exception ex){
+            return null;
+        }
+        return o;
+    }
+
+    public static String tarkistanimi(String nimi) {
+        String n = nimi.trim();
+        n = n.toUpperCase().substring(0, 1) +
+                n.toLowerCase().substring(1, n.length());
+        return n;
+    }
+}
+
+
+//TEHTÄVÄ 12
+
+public class Kayttaja {
+    private String Nimi;
+    private String Osoite;
+
+    public Kayttaja(){
+    }
+    public Kayttaja(String nimi, String osoite) {
+        Nimi = nimi;
+        Osoite = osoite;
+    }
+
+    public String getNimi() {
+        return Nimi;
+    }
+
+    public void setNimi(String nimi) {
+        Nimi = nimi;
+    }
+
+    public String getOsoite() {
+        return Osoite;
+    }
+
+    public void setOsoite(String osoite) {
+        Osoite = osoite;
+    }
+
+    public String toString() {
+        return "Käyttäjä:" +
+                " " + getNimi() +
+                " " + getOsoite();
+    }
+}
+
+import java.time.LocalDate;
+import java.util.Date;
+
+public class LeasingTieto {
+    Tietokone tietokone = new Tietokone();
+    Kayttaja kayttaja = new Kayttaja();
+    private LocalDate paivamaara;
+
+    public LocalDate getPaivamaara() {
+        return paivamaara;
+    }
+
+    public void setPaivamaara(LocalDate paivamaara) {
+        this.paivamaara = paivamaara;
+    }
+
+    @Override
+    public String toString() {
+        return "Leasingtiedot:" +
+                " " + tietokone.toString() +
+                " " + kayttaja.toString() +
+                " " + getPaivamaara();
+    }
+}
+public class LeasingUtils {
+    public LeasingTieto KopioiTiedot(LeasingTieto lt){
+        LeasingTieto uusi = new LeasingTieto();
+        uusi.tietokone.setMerkki(lt.tietokone.getMerkki());
+        uusi.tietokone.setMalli(lt.tietokone.getMalli());
+
+        return uusi;
+    }
+}
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LeasingTieto liisinki = new LeasingTieto();
+
+        Scanner sc = new Scanner(System.in);
+        boolean vastaus;
+
+
+        System.out.println("Syötä tietokoneen tiedot: ");
+        System.out.print("Anna merkki: ");
+        liisinki.tietokone.setMerkki(sc.nextLine());
+
+        System.out.print("Anna malli: ");
+        liisinki.tietokone.setMalli(sc.nextLine());
+
+
+        System.out.print("Anna sarjanumero: ");
+        liisinki.tietokone.setSarjanumero(sc.nextLine());
+
+
+        System.out.println("Syötä käyttäjän tiedot: ");
+        System.out.print("Anna nimi: ");
+        liisinki.kayttaja.setNimi(sc.nextLine());
+
+        System.out.print("Anna osoite: ");
+        liisinki.kayttaja.setOsoite(sc.nextLine());
+
+        System.out.print("Anna päivämäärä(dd.MM.yyyy): ");
+        liisinki.setPaivamaara(LocalDate.parse(sc.next(), formatter));
+        sc.nextLine();
+
+        System.out.print("Lisätäänkö uusi tieto? (k/e) ");
+        vastaus = sc.nextLine().equalsIgnoreCase("k");
+        while(vastaus){
+
+            System.out.print("Anna tietokoneen sarjanumero: ");
+            liisinki.tietokone.setSarjanumero(sc.nextLine());
+
+            System.out.println("Syötä käyttäjän tiedot: ");
+            System.out.print("Anna nimi: ");
+            liisinki.kayttaja.setNimi(sc.nextLine());
+
+            System.out.print("Anna osoite: ");
+            liisinki.kayttaja.setOsoite(sc.nextLine());
+
+            System.out.print("Anna päivämäärä(dd.MM.yyyy): ");
+            liisinki.setPaivamaara(LocalDate.parse(sc.next(), formatter));
+            sc.nextLine();
+
+            System.out.print("Lisätäänkö uusi tieto? (k/e) ");
+            vastaus = sc.nextLine().equalsIgnoreCase("k");
+
+        }
+
+        System.out.println(liisinki.toString());
+
+    }
+}
+public class Tietokone {
+    private String merkki;
+    private String malli;
+    private String sarjanumero;
+
+    public Tietokone() {
+    }
+
+    public Tietokone(String merkki, String malli, String sarjanumero) {
+        this.merkki = merkki;
+        this.malli = malli;
+        this.sarjanumero = sarjanumero;
+    }
+
+    public String getMerkki() {
+        return merkki;
+    }
+
+    public void setMerkki(String merkki) {
+        this.merkki = merkki;
+    }
+
+    public String getMalli() {
+        return malli;
+    }
+
+    public void setMalli(String malli) {
+        this.malli = malli;
+    }
+
+    public String getSarjanumero() {
+        return sarjanumero;
+    }
+
+    public void setSarjanumero(String sarjanumero) {
+        this.sarjanumero = sarjanumero;
+    }
+
+    @Override
+    public String toString() {
+        return "Tietokone:" +
+                " " + getMerkki() +
+                " " + getMalli() +
+                " " + getSarjanumero();
+    }
+}
+
+
+
+//TEHTÄVÄ 13
+
+
+//TEHTÄVÄ 14
+//TEHTÄVÄ 15
+//TEHTÄVÄ 16
